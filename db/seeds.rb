@@ -15,5 +15,5 @@ end
 
 10.times do
   interval = rand(0..23).hours + rand(0..59).minutes + rand(0..59).seconds
-  Flight.create(start: DateTime.now + rand(-365..365), duration: interval, departure_airport_id: rand(1..10), arrival_airport_id: rand(1..10))
+  Flight.create(start: DateTime.now + rand(-365..365), duration: interval, departure_airport_id: rand(1..10), arrival_airport_id: rand(1..10), seats: rand(1..80))
 end
