@@ -1,2 +1,13 @@
-<h1>Flights#index</h1>
-<p>Find me in app/views/flights/index.html.erb</p>
+<h1>Flights</h1>
+
+<%= form_with model: @flight, method: :get do |form| %>
+  <%= form.label :departure_airport_id, 'Departure airport:' %>
+  <%= form.collection_select :departure_airport_id, Airport.order(:code), :id, :code %>
+  <%= form.label :departure_airport_id, 'Arrival airport:' %>
+  <%= form.collection_select :arrival_airport_id, Airport.order(:code), :id, :code %>
+  <%= form.label :departure_airport_id, 'Number of passengers:' %>
+  <%= form.select :passengers, [1, 2, 3, 4] %>
+  <%= form.label :departure_airport_id, 'Flight date:' %>
+  <%= form.select :start, Flight.order(:start).pluck(:start).map {|date| date.to_date.strftime('%d/%m/%Y')}.uniq %>
+  <%= form.submit 'Search' %>
+<% end %>
