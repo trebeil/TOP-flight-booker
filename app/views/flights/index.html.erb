@@ -12,12 +12,14 @@
   <%= form.submit 'Search' %>
 <% end %>
 
-<% if @flights.empty? %>
-  <div>There are no flights available that match these filters</div>
-<% else %>
-  <% @flights.each do |flight| %>
-    <div>
-      <%= "#{flight.departure_airport.code}, #{flight.arrival_airport.code}, #{flight.start}" %>
-    </div>
+<% if params[:departure_airport_id] != nil %>
+  <% if @flights.empty? %>
+    <div>There are no flights available that match these filters</div>
+  <% else %>
+    <% @flights.each do |flight| %>
+      <div>
+        <%= "#{flight.departure_airport.code}, #{flight.arrival_airport.code}, #{flight.start}" %>
+      </div>
+    <% end %>
   <% end %>
 <% end %>
