@@ -2,13 +2,13 @@
 
 <%= form_with model: @flight, method: :get do |form| %>
   <%= form.label :departure_airport_id, 'Departure airport:' %>
-  <%= form.collection_select :departure_airport_id, Airport.order(:code), :id, :code %>
+  <%= form.collection_select :departure_airport_id, Airport.order(:code), :id, :code, { selected: params[:departure_airport_id], include_blank: true } , { required: true } %>
   <%= form.label :arrival_airport_id, 'Arrival airport:' %>
-  <%= form.collection_select :arrival_airport_id, Airport.order(:code), :id, :code %>
+  <%= form.collection_select :arrival_airport_id, Airport.order(:code), :id, :code, { selected: params[:arrival_airport_id], include_blank: true }, { required: true } %>
   <%= form.label :passengers, 'Number of passengers:' %>
-  <%= form.select :passengers, [1, 2, 3, 4] %>
+  <%= form.select :passengers, [1, 2, 3, 4], { selected: params[:passengers], include_blank: true }, { required: true } %>
   <%= form.label :start, 'Flight date:' %>
-  <%= form.select :start, Flight.order(:start).pluck(:start).map {|date| date.to_date.strftime('%d/%m/%Y')}.uniq %>
+  <%= form.select :start, Flight.order(:start).pluck(:start).map {|date| date.to_date.strftime('%d/%m/%Y')}.uniq, { selected: params[:start], include_blank: true }, { required: true } %>
   <%= form.submit 'Search' %>
 <% end %>
 
