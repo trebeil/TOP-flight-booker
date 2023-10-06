@@ -11,21 +11,25 @@ Flight.destroy_all
 Passenger.destroy_all
 Booking.destroy_all
 
+# Create Airports
 10.times do
   Airport.create(code: Array('A'..'Z').sample(3).join)
 end
 
+# Create Flights
 10.times do
   interval = rand(0..23).hours + rand(0..59).minutes + rand(0..59).seconds
   Flight.create(start: DateTime.now + rand(-365..365), duration: interval, departure_airport_id: rand(1..10), arrival_airport_id: rand(1..10), seats: rand(1..80))
 end
 
+# Create Passengers
 10.times do
   name = Array('a'..'z').sample(8).join
   email = "#{name}@#{Array('a'..'z').sample(5).join}.com"
   Passenger.create(name: name, email: email)
 end
 
+# Create Bookings
 5.times do
   n1 = Array(1..10).sample(1).first
   n2 = Array(1..10).sample(1).first
