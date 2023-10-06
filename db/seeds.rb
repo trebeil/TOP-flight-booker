@@ -30,8 +30,17 @@ end
 end
 
 # Create Bookings
+10.times do
+  Booking.create(flight_id: Array(1..10).sample(1).first)
+end
+
+# Create bookings_passengers entries
 5.times do
-  n1 = Array(1..10).sample(1).first
-  n2 = Array(1..10).sample(1).first
-  Flight.find(n1).passengers << Passenger.find(n2)
+  random_booking_id = Array(1..10).sample(1).first
+  random_passenger_amount = Array(1..4).sample(1).first
+  random_passengers = []
+  random_passenger_amount.times do
+    random_passengers << Passenger.find(Array(1..10).sample(1).first)
+  end
+  Booking.find(random_booking_id).passengers << random_passengers.uniq
 end
