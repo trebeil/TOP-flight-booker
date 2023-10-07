@@ -17,12 +17,16 @@
     <div>There are no flights available that match these filters</div>
   <% else %>
     <%= form_with url: new_booking_path, method: :get, data: {turbo: false} do |form| %>
-      <% @flights.each do |flight| %>
-        <%= form.radio_button :flight_id, flight.id %>
-        <%= form.label "flight_id_#{flight.id}", "Flight number: #{flight.id} | Departure airport: #{flight.departure_airport.code} | Arrival airport: #{flight.arrival_airport.code} | Departure: #{flight.start}" %>
-      <% end %>
-      <%= form.hidden_field :passengers, value: params[:passengers] %>
-      <%= form.submit 'Choose flight' %>
+      <ul>
+        <% @flights.each do |flight| %>
+          <li>
+            <%= form.radio_button :flight_id, flight.id %>
+            <%= form.label "flight_id_#{flight.id}", "Flight number: #{flight.id} | Departure airport: #{flight.departure_airport.code} | Arrival airport: #{flight.arrival_airport.code} | Departure: #{flight.start}" %>
+          </li>
+        <% end %>
+        <%= form.hidden_field :passengers, value: params[:passengers] %>
+        <%= form.submit 'Choose flight' %>
+      </ul>
     <% end %>
   <% end %>
 <% end %>
