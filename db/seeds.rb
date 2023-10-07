@@ -17,30 +17,30 @@ Booking.destroy_all
 end
 
 # Create Flights
-10.times do
+3000.times do
   interval = rand(0..23).hours + rand(0..59).minutes + rand(0..59).seconds
-  Flight.create(start: DateTime.now + rand(-365..365), duration: interval, departure_airport_id: rand(1..10), arrival_airport_id: rand(1..10), seats: rand(1..80))
+  Flight.create(start: DateTime.now + rand(0..30), duration: interval, departure_airport_id: rand(1..10), arrival_airport_id: rand(1..10), seats: rand(1..80))
 end
 
 # Create Passengers
-10.times do
+100.times do
   name = Array('a'..'z').sample(8).join
   email = "#{name}@#{Array('a'..'z').sample(5).join}.com"
   Passenger.create(name: name, email: email)
 end
 
 # Create Bookings
-10.times do
-  Booking.create(flight_id: Array(1..10).sample(1).first)
+100.times do
+  Booking.create(flight_id: rand(1..3000))
 end
 
 # Create bookings_passengers entries
-5.times do
-  random_booking_id = Array(1..10).sample(1).first
-  random_passenger_amount = Array(1..4).sample(1).first
+100.times do
+  random_booking_id = rand(1..100)
+  random_passenger_amount = rand(1..4)
   random_passengers = []
   random_passenger_amount.times do
-    random_passengers << Passenger.find(Array(1..10).sample(1).first)
+    random_passengers << Passenger.find(rand(1..100))
   end
   Booking.find(random_booking_id).passengers << random_passengers.uniq
 end
