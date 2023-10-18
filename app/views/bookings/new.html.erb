@@ -8,19 +8,30 @@
   <li>Destination airport: <%= @flight.arrival_airport.code %></li>
 </ul>
 
-<%= form_with model: @booking do |form| %>
-  <h2>Passengers</h2>
-  <ul>
-    <%= form.fields_for :passengers do |f| %>
-      <li>
-        <%= f.label :name %>
-        <%= f.text_field :name %>
+<div data-controller='passengers'>
+  <%= form_with model: @booking do |form| %>
+    <h2>Passengers</h2>
+    <ul data-passengers-target='list'>
+      <%= form.fields_for :passengers do |f| %>
+        <li>
+          <%= f.label :name %>
+          <%= f.text_field :name %>
 
-        <%= f.label :email %>
-        <%= f.email_field :email %>
-      </li>
-    <% end %>
-  </ul>
-  <%= form.hidden_field :flight_id, value: @flight.id %>
-  <%= form.submit %>
-<% end %>
+          <%= f.label :email %>
+          <%= f.email_field :email %>
+        </li>
+      <% end %>
+    </ul>
+    <%= form.hidden_field :flight_id, value: @flight.id %>
+    <%= form.submit %>
+  <% end %>
+  <%= button_tag 'Add Passenger', data: { action: 'click->passengers#add' } %>
+  <template id='tpl'>
+    <li>
+      <label>Name</label>
+      <input type="text">
+      <label>Email</label>
+      <input type="email">
+    </li>
+  </template>
+</div>
