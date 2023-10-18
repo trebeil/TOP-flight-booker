@@ -9,8 +9,10 @@
 </ul>
 
 <div data-controller='passengers'>
+  <h2>Passengers</h2>
+  <%= button_tag 'Add Passenger', data: { action: 'click->passengers#add' } %>
+  <%= button_tag 'Remove Passenger', data: { action: 'click->passengers#remove', 'passengers-target': 'button' } %>
   <%= form_with model: @booking do |form| %>
-    <h2>Passengers</h2>
     <ul data-passengers-target='list'>
       <%= form.fields_for :passengers do |f| %>
         <li>
@@ -25,8 +27,7 @@
     <%= form.hidden_field :flight_id, value: @flight.id %>
     <%= form.submit %>
   <% end %>
-  <%= button_tag 'Add Passenger', data: { action: 'click->passengers#add' } %>
-  <template id='tpl'>
+  <template>
     <li>
       <label>Name</label>
       <input type="text">

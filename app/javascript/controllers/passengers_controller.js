@@ -1,12 +1,17 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = [ 'list' ]
+  static targets = [ 'list' , 'button' ]
+
+  connect() {
+    this.manageRemoveButton ();
+  }
+
   add() {
-    let ul = this.listTarget;
     let template = this.element.getElementsByTagName('template')[0];
-    console.log(this.context)
     let clone = template.content.cloneNode(true);
+
+    let ul = this.listTarget;
     ul.appendChild(clone);
 
     let passengerIndex = ul.getElementsByTagName('li').length - 1;
@@ -25,5 +30,22 @@ export default class extends Controller {
     let emailInput = li.children[3];
     emailInput.setAttribute('name', `booking[passengers_attributes][${passengerIndex}][email]`);
     emailInput.setAttribute('id', `booking_passengers_attributes_${passengerIndex}_email`);
+
+    this.manageRemoveButton ();
+  }
+
+  remove () {
+    let ul = this.listTarget;
+    ul.lastElementChild.remove();
+    this.manageRemoveButton();
+  }
+
+  manageRemoveButton() {
+    let ul = this.listTarget;
+    if (ul.children.length == 1) {
+      this.buttonTarget.setAttribute('disabled', true);
+    } else {
+      this.buttonTarget.removeAttribute('disabled');
+    }
   }
 }
