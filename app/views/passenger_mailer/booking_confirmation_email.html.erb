@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Booking confirmation</h1>
+    <h2>Hi, <%= @passenger.name %>!</h2>
+    <div>
+      Your flight has been successfully booked. Please have a look at your 
+      booking information below.
+    </div>
+    <br>
+    <h2>Booking #<%= @booking.id %></h2>
+    <ul>
+      <li>Flight number: <%= @booking.flight_id %></li>
+      <li>Flight date: <%= @booking.flight.start.strftime('%d %b %Y - %H:%M %Z') %></li>
+      <li>Departure airport: <%= @booking.flight.departure_airport.code %></li>
+      <li>Destination airport: <%= @booking.flight.arrival_airport.code %></li>
+    </ul>
+    <br>
+    <div>
+      Should you have any questions abour your booking, don't hesitate to 
+      contact us.
+    </div>
+    <br>
+    <div>Thanks for choosing Example.com and have a great day!</div>
+  </body>
+</html>

@@ -1,0 +1,17 @@
+Booking confirmation
+
+Hi, <%= @passenger.name %>!
+
+Your flight has been successfully booked. Please have a look at your booking information below.
+
+======================================================
+Booking #<%= @booking.id %>
+Flight number: <%= @booking.flight_id %>
+Flight date: <%= @booking.flight.start.strftime('%d %b %Y - %H:%M %Z') %>
+Departure airport: <%= @booking.flight.departure_airport.code %>
+Destination airport: <%= @booking.flight.arrival_airport.code %>
+======================================================
+
+Should you have any questions abour your booking, don't hesitate to contact us.
+
+Thanks for choosing Example.com and have a great day!
